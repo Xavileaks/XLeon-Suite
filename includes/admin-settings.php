@@ -94,6 +94,47 @@ function xw_get_feature_definitions() {
     );
 }
 
+/**
+ * Organiza las funciones en las secciones visibles de la pantalla de ajustes.
+ *
+ * @return array
+ */
+function xw_get_feature_groups() {
+    return array(
+        'wordpress' => array(
+            'title'       => 'WordPress',
+            'description' => xw_t( 'Funciones generales del sitio y del administrador.', 'General website and administrator features.' ),
+            'features'    => array(
+                'assets_styles',
+                'classic_editor',
+                'hide_wp_version',
+                'login_customization',
+                'hide_admin_bar',
+                'admin_bar_style',
+                'admin_branding',
+                'preloader',
+                'admin_notices',
+                'plugin_export',
+            ),
+        ),
+        'elementor' => array(
+            'title'       => 'Elementor',
+            'description' => xw_t( 'Funciones que actúan sobre los formularios de Elementor.', 'Features that apply to Elementor forms.' ),
+            'features'    => array(
+                'elementor_messages',
+                'elementor_phone_mask',
+                'elementor_email_mask',
+                'elementor_message_mask',
+            ),
+        ),
+        'woocommerce' => array(
+            'title'       => 'WooCommerce',
+            'description' => xw_t( 'Funciones específicas para tiendas WooCommerce.', 'Features specifically for WooCommerce stores.' ),
+            'features'    => array(),
+        ),
+    );
+}
+
 function xw_get_default_settings() {
     $features = array();
 
@@ -341,13 +382,34 @@ function xw_render_settings_page() {
         <form action="options.php" method="post">
             <?php settings_fields( 'xw_settings_group' ); ?>
 
-            <div class="xw-feature-grid">
-                <?php foreach ( xw_get_feature_definitions() as $key => $feature ) : ?>
+            <?php $feature_definitions = xw_get_feature_definitions(); ?>
+            <div class="xw-feature-sections">
+                <?php foreach ( xw_get_feature_groups() as $group_key => $group ) : ?>
+                    <section class="xw-feature-section" aria-labelledby="xw-section-<?php echo esc_attr( $group_key ); ?>">
+                        <header class="xw-feature-section-header">
+                            <h2 id="xw-section-<?php echo esc_attr( $group_key ); ?>"><?php echo esc_html( $group['title'] ); ?></h2>
+                            <p><?php echo esc_html( $group['description'] ); ?></p>
+                        </header>
+
+                        <?php if ( empty( $group['features'] ) ) : ?>
+                            <div class="xw-feature-empty">
+                                <?php echo esc_html( xw_t( 'Todavía no hay funciones disponibles en esta sección.', 'There are no features available in this section yet.' ) ); ?>
+                            </div>
+                        <?php else : ?>
+                            <div class="xw-feature-grid">
+                                <?php foreach ( $group['features'] as $key ) : ?>
+                                    <?php
+                                    if ( empty( $feature_definitions[ $key ] ) ) {
+                                        continue;
+                                    }
+
+                                    $feature = $feature_definitions[ $key ];
+                                    ?>
                     <?php $enabled = ! empty( $settings['features'][ $key ] ); ?>
                     <section class="xw-feature-card<?php echo $enabled ? ' is-enabled' : ''; ?>" data-xw-feature>
                         <div class="xw-feature-summary">
                             <div class="xw-feature-copy">
-                                <h2><?php echo esc_html( $feature['title'] ); ?></h2>
+                                <h3><?php echo esc_html( $feature['title'] ); ?></h3>
                                 <p><?php echo esc_html( $feature['description'] ); ?></p>
                             </div>
                             <label class="xw-switch">
@@ -537,6 +599,10 @@ function xw_render_settings_page() {
                                     <p><?php echo esc_html( xw_t( 'Puede ajustarse entre 50 y 600 píxeles.', 'It can be adjusted between 50 and 600 pixels.' ) ); ?></p>
                                 </div>
                                 <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+                    </section>
+                                <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
                     </section>
