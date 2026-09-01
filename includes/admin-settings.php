@@ -79,6 +79,19 @@ function xw_get_feature_definitions() {
             'title'       => xw_t( 'Form Elementor: validación de mensajes', 'Form Elementor: message validation' ),
             'description' => xw_t( 'Limita los caracteres admitidos en áreas de texto de Elementor.', 'Limits the characters allowed in Elementor text areas.' ),
         ),
+        'woocommerce_auto_cart' => array(
+            'title'       => xw_t( 'WooCommerce: actualizar carrito automáticamente', 'WooCommerce: update cart automatically' ),
+            'description' => xw_t( 'Actualiza el importe del carrito después de cambiar la cantidad de un producto.', 'Updates the cart total after changing a product quantity.' ),
+            'settings'    => true,
+        ),
+        'woocommerce_hide_success_messages' => array(
+            'title'       => xw_t( 'WooCommerce: ocultar mensajes de confirmación', 'WooCommerce: hide confirmation messages' ),
+            'description' => xw_t( 'Oculta únicamente los avisos de éxito como “producto añadido” o “carrito actualizado”; mantiene visibles los errores y la información.', 'Hides only success notices such as “product added” or “cart updated”; errors and information remain visible.' ),
+        ),
+        'woocommerce_delete_product_images' => array(
+            'title'       => xw_t( 'WooCommerce: eliminar imágenes con el producto', 'WooCommerce: delete images with product' ),
+            'description' => xw_t( 'Elimina permanentemente sus imágenes al borrar un producto y conserva las usadas por otro producto.', 'Permanently deletes its images with the product while preserving images used by another product.' ),
+        ),
         'preloader' => array(
             'title'       => xw_t( 'Transición de carga', 'Loading transition' ),
             'description' => xw_t( 'Añade una aparición suave del contenido cuando termina de cargar la página.', 'Adds a smooth content fade-in when the page finishes loading.' ),
@@ -130,7 +143,11 @@ function xw_get_feature_groups() {
         'woocommerce' => array(
             'title'       => 'WooCommerce',
             'description' => xw_t( 'Funciones específicas para tiendas WooCommerce.', 'Features specifically for WooCommerce stores.' ),
-            'features'    => array(),
+            'features'    => array(
+                'woocommerce_auto_cart',
+                'woocommerce_hide_success_messages',
+                'woocommerce_delete_product_images',
+            ),
         ),
     );
 }
@@ -168,6 +185,9 @@ function xw_get_default_settings() {
             'language'          => xw_interface_language(),
             'allowed_countries' => array(),
             'primary_countries' => array(),
+        ),
+        'woocommerce' => array(
+            'cart_update_delay' => 1,
         ),
     );
 }
@@ -226,6 +246,7 @@ function xw_sanitize_settings( $input ) {
     $styles    = isset( $input['styles'] ) && is_array( $input['styles'] ) ? $input['styles'] : array();
     $branding  = isset( $input['admin_branding'] ) && is_array( $input['admin_branding'] ) ? $input['admin_branding'] : array();
     $phone     = isset( $input['phone'] ) && is_array( $input['phone'] ) ? $input['phone'] : array();
+    $woocommerce = isset( $input['woocommerce'] ) && is_array( $input['woocommerce'] ) ? $input['woocommerce'] : array();
 
     foreach ( xw_get_feature_definitions() as $key => $definition ) {
         $sanitized['features'][ $key ] = empty( $features[ $key ] ) ? 0 : 1;
@@ -293,6 +314,11 @@ function xw_sanitize_settings( $input ) {
     $sanitized['phone']['language']          = $phone_language;
     $sanitized['phone']['allowed_countries'] = $allowed_countries;
     $sanitized['phone']['primary_countries'] = array_slice( $primary_countries, 0, 2 );
+
+    $cart_update_delay = isset( $woocommerce['cart_update_delay'] ) && is_scalar( $woocommerce['cart_update_delay'] )
+        ? (float) str_replace( ',', '.', (string) $woocommerce['cart_update_delay'] )
+        : $defaults['woocommerce']['cart_update_delay'];
+    $sanitized['woocommerce']['cart_update_delay'] = max( 0, min( 30, round( $cart_update_delay, 1 ) ) );
 
     return $sanitized;
 }
@@ -559,6 +585,15 @@ function xw_render_settings_page() {
                                             </label>
                                         </div>
                                         <div class="xw-country-code-grid" data-xw-country-grid></div>
+                                    </div>
+                                <?php elseif ( 'woocommerce_auto_cart' === $key ) : ?>
+                                    <div class="xw-field-row xw-field-full">
+                                        <label for="xw-cart-update-delay"><?php echo esc_html( xw_t( 'Espera antes de actualizar', 'Delay before updating' ) ); ?></label>
+                                        <div class="xw-number-control">
+                                            <input id="xw-cart-update-delay" type="number" name="xw_settings[woocommerce][cart_update_delay]" value="<?php echo esc_attr( $settings['woocommerce']['cart_update_delay'] ); ?>" min="0" max="30" step="0.1" inputmode="decimal">
+                                            <span><?php echo esc_html( xw_t( 'segundos', 'seconds' ) ); ?></span>
+                                        </div>
+                                        <p><?php echo esc_html( xw_t( 'La espera comienza después del último cambio de cantidad. Use 0 para actualizar inmediatamente.', 'The delay starts after the last quantity change. Use 0 to update immediately.' ) ); ?></p>
                                     </div>
                                 <?php elseif ( 'login_customization' === $key ) : ?>
                                 <div class="xw-field-row">

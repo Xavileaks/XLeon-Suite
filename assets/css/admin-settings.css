@@ -62,7 +62,10 @@
 }
 
 .xw-feature-card {
+    display: flex;
+    flex-direction: column;
     align-self: start;
+    min-height: 152px;
     border: 1px solid #dcdcde;
     border-radius: 10px;
     background: #fff;
@@ -78,6 +81,7 @@
 
 .xw-feature-summary {
     display: flex;
+    flex: 1 0 auto;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
@@ -171,6 +175,7 @@
 
 .xw-options-toggle {
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -536,6 +541,10 @@
 
     .xw-feature-grid {
         grid-template-columns: 1fr;
+    }
+
+    .xw-feature-card {
+        min-height: 0;
     }
 
     .xw-feature-options {

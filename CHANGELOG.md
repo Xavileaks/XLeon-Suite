@@ -1,5 +1,12 @@
 # Historial de cambios
 
+## 1.2.3
+
+- WooCommerce: actualización automática del carrito al cambiar cantidades, con espera configurable en segundos.
+- WooCommerce: opción para ocultar únicamente los mensajes de confirmación `.woocommerce-message` del frontend.
+- WooCommerce: eliminación de imágenes adjuntas, destacada y galería al borrar definitivamente un producto, conservando las compartidas con otros productos.
+- Interfaz: tarjetas alineadas visualmente en escritorio y con altura natural en dispositivos móviles.
+
 ## 1.2.2
 
 - Detección inmediata de nuevas publicaciones de GitHub durante la comprobación de WordPress.

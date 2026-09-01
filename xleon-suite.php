@@ -3,7 +3,7 @@
 Plugin Name: XLeon Suite
 Plugin URI: https://github.com/Xavileaks/XLeon-Suite
 Description: Modular WordPress features and global assets.
-Version: 1.2.2
+Version: 1.2.3
 Author: Xavier Leon
 Author URI: https://xavileeon.com
 Update URI: https://github.com/Xavileaks/XLeon-Suite
@@ -14,7 +14,7 @@ Text Domain: xleon-suite
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'XW_FUNCTIONS_VERSION', '1.2.2' );
+define( 'XW_FUNCTIONS_VERSION', '1.2.3' );
 define( 'XW_FUNCTIONS_FILE', __FILE__ );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin-settings.php';
@@ -652,6 +652,191 @@ button.elementor-button.xl-submit-disabled{
 }
 </style>
 <?php }
+
+
+// WOOCOMMERCE: ACTUALIZAR EL CARRITO AL CAMBIAR LA CANTIDAD
+
+add_action( 'wp_enqueue_scripts', 'xw_enqueue_woocommerce_auto_cart_dependencies' );
+function xw_enqueue_woocommerce_auto_cart_dependencies() {
+    if (
+        ! xw_feature_enabled( 'woocommerce_auto_cart' ) ||
+        ! function_exists( 'is_cart' ) ||
+        ! is_cart()
+    ) {
+        return;
+    }
+
+    wp_enqueue_script( 'jquery' );
+}
+
+add_action( 'wp_footer', 'xw_woocommerce_auto_update_cart', 40 );
+function xw_woocommerce_auto_update_cart() {
+    if (
+        ! xw_feature_enabled( 'woocommerce_auto_cart' ) ||
+        ! function_exists( 'is_cart' ) ||
+        ! is_cart()
+    ) {
+        return;
+    }
+
+    $settings = xw_get_settings();
+    $seconds  = isset( $settings['woocommerce']['cart_update_delay'] )
+        ? (float) $settings['woocommerce']['cart_update_delay']
+        : 1;
+    $delay    = (int) round( max( 0, min( 30, $seconds ) ) * 1000 );
+    ?>
+    <script>
+    (function ($) {
+        'use strict';
+
+        var updateTimer = null;
+        var delay = <?php echo (int) $delay; ?>;
+
+        $(document.body).on('input change', 'div.woocommerce form.woocommerce-cart-form input.qty', function () {
+            window.clearTimeout(updateTimer);
+            updateTimer = window.setTimeout(function () {
+                var button = $('div.woocommerce [name="update_cart"]').first();
+
+                if (!button.length || button.hasClass('loading')) {
+                    return;
+                }
+
+                button.prop('disabled', false).removeAttr('disabled').trigger('click');
+            }, delay);
+        });
+
+        $(document.body).on('updated_wc_div', function () {
+            window.clearTimeout(updateTimer);
+            updateTimer = null;
+        });
+    })(jQuery);
+    </script>
+    <?php
+}
+
+
+// WOOCOMMERCE: OCULTAR LOS MENSAJES DE CONFIRMACIÓN DEL FRONTEND
+
+add_filter( 'woocommerce_add_message', 'xw_hide_woocommerce_success_message', PHP_INT_MAX );
+function xw_hide_woocommerce_success_message( $message ) {
+    if (
+        ! xw_feature_enabled( 'woocommerce_hide_success_messages' ) ||
+        ( is_admin() && ! wp_doing_ajax() )
+    ) {
+        return $message;
+    }
+
+    return '';
+}
+
+add_action( 'wp_head', 'xw_hide_woocommerce_success_message_styles', 99 );
+function xw_hide_woocommerce_success_message_styles() {
+    if ( ! xw_feature_enabled( 'woocommerce_hide_success_messages' ) || is_admin() ) {
+        return;
+    }
+    ?>
+    <style id="xw-hide-woocommerce-success-messages">
+    .woocommerce-message {
+        display: none !important;
+    }
+    </style>
+    <?php
+}
+
+
+// WOOCOMMERCE: ELIMINAR LAS IMÁGENES AL BORRAR DEFINITIVAMENTE UN PRODUCTO
+
+add_action( 'before_delete_post', 'xw_delete_product_images', 10, 2 );
+
+/**
+ * Comprueba si otro producto o una de sus variaciones utiliza una imagen.
+ *
+ * @param int $attachment_id ID de la imagen.
+ * @param int $product_id    Producto que se está eliminando.
+ * @return bool
+ */
+function xw_product_image_is_shared( $attachment_id, $product_id ) {
+    $other_uses = get_posts(
+        array(
+            'post_type'          => array( 'product', 'product_variation' ),
+            'post_status'        => 'any',
+            'post__not_in'       => array( $product_id ),
+            'post_parent__not_in' => array( $product_id ),
+            'posts_per_page'     => 1,
+            'fields'             => 'ids',
+            'no_found_rows'      => true,
+            'suppress_filters'   => true,
+            'meta_query'         => array(
+                'relation' => 'OR',
+                array(
+                    'key'     => '_thumbnail_id',
+                    'value'   => (string) $attachment_id,
+                    'compare' => '=',
+                ),
+                array(
+                    'key'     => '_product_image_gallery',
+                    'value'   => '(^|,)' . absint( $attachment_id ) . '(,|$)',
+                    'compare' => 'REGEXP',
+                ),
+            ),
+        )
+    );
+
+    return ! empty( $other_uses );
+}
+
+function xw_delete_product_images( $post_id, $post = null ) {
+    if ( ! xw_feature_enabled( 'woocommerce_delete_product_images' ) ) {
+        return;
+    }
+
+    if ( ! $post instanceof WP_Post ) {
+        $post = get_post( $post_id );
+    }
+
+    if ( ! $post || 'product' !== $post->post_type ) {
+        return;
+    }
+
+    $image_ids = get_posts(
+        array(
+            'post_type'      => 'attachment',
+            'post_status'    => 'any',
+            'post_parent'    => $post_id,
+            'post_mime_type' => 'image',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        )
+    );
+
+    $thumbnail_id = get_post_thumbnail_id( $post_id );
+    $gallery_ids  = array_filter(
+        array_map(
+            'absint',
+            explode( ',', (string) get_post_meta( $post_id, '_product_image_gallery', true ) )
+        )
+    );
+
+    if ( $thumbnail_id ) {
+        $image_ids[] = (int) $thumbnail_id;
+    }
+
+    $image_ids = array_values( array_unique( array_merge( $image_ids, $gallery_ids ) ) );
+
+    foreach ( $image_ids as $attachment_id ) {
+        $attachment_id = absint( $attachment_id );
+
+        if (
+            ! $attachment_id ||
+            ! wp_attachment_is_image( $attachment_id ) ||
+            xw_product_image_is_shared( $attachment_id, $post_id )
+        ) {
+            continue;
+        }
+
+        wp_delete_attachment( $attachment_id, true );
+    }
+}
 
 
 // PRELOADER
