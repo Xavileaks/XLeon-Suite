@@ -1,5 +1,10 @@
 # Historial de cambios
 
+## 1.2.2
+
+- Detección inmediata de nuevas publicaciones de GitHub durante la comprobación de WordPress.
+- Compatibilidad con el mecanismo oficial de actualizaciones externas mediante `Update URI`.
+
 ## 1.2.1
 
 - Funciones organizadas en secciones independientes para WordPress, Elementor y WooCommerce.

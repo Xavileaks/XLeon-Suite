@@ -96,7 +96,10 @@ function xw_github_check_for_update( $transient ) {
         return $transient;
     }
 
-    $release = xw_github_get_latest_release();
+    // WordPress ya controla la frecuencia de sus comprobaciones. Consultar la
+    // publicación directamente evita conservar como "última" una versión que
+    // se publicó justo después de haber llenado nuestra caché interna.
+    $release = xw_github_get_latest_release( true );
 
     if (
         is_wp_error( $release ) ||
@@ -121,6 +124,48 @@ function xw_github_check_for_update( $transient ) {
     return $transient;
 }
 add_filter( 'pre_set_site_transient_update_plugins', 'xw_github_check_for_update' );
+
+/**
+ * Responde al mecanismo oficial de Update URI para repositorios externos.
+ *
+ * WordPress usa el hostname de Update URI para crear este filtro dinámico. Al
+ * devolver también la versión instalada como "sin actualización", mantiene
+ * disponibles los controles de actualización automática del plugin.
+ *
+ * @param array|false $update      Información proporcionada por otro actualizador.
+ * @param array       $plugin_data Cabeceras del plugin instalado.
+ * @param string      $plugin_file Ruta relativa del archivo principal.
+ * @param string[]    $locales     Idiomas instalados.
+ * @return array|false
+ */
+function xw_github_update_uri_response( $update, $plugin_data, $plugin_file, $locales ) {
+    unset( $locales );
+
+    if ( plugin_basename( XW_FUNCTIONS_FILE ) !== $plugin_file ) {
+        return $update;
+    }
+
+    $release = xw_github_get_latest_release( true );
+
+    if ( is_wp_error( $release ) || empty( $release['version'] ) ) {
+        return $update;
+    }
+
+    $update_uri = ! empty( $plugin_data['UpdateURI'] )
+        ? esc_url_raw( $plugin_data['UpdateURI'] )
+        : 'https://github.com/' . XW_GITHUB_REPOSITORY;
+
+    return array(
+        'id'           => $update_uri,
+        'slug'         => dirname( $plugin_file ),
+        'version'      => $release['version'],
+        'url'          => $release['details_url'],
+        'package'      => $release['package'],
+        'requires_php' => '7.4',
+        'autoupdate'   => false,
+    );
+}
+add_filter( 'update_plugins_github.com', 'xw_github_update_uri_response', 10, 4 );
 
 /**
  * Completa la ventana de detalles que WordPress muestra antes de actualizar.
