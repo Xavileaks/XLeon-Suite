@@ -1,0 +1,8 @@
+build/
+*.zip
+xw-temp.zip
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
