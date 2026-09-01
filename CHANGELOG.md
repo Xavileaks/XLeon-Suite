@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.4
+
+- Interfaz: títulos, descripciones e interruptores alineados entre tarjetas con y sin ajustes desplegables.
+
 ## 1.2.3
 
 - WooCommerce: actualización automática del carrito al cambiar cantidades, con espera configurable en segundos.

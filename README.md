@@ -15,7 +15,7 @@ La instalación inicial del plugin sigue haciéndose una sola vez con el ZIP. A 
 3. Crear y subir una etiqueta con esa versión, por ejemplo:
 
 ```powershell
-git tag v1.2.3
+git tag v1.2.4
 git push origin main --tags
 ```
 
