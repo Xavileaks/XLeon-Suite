@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.2.5
+
+- WordPress: nuevo botón «Volver arriba» con desplazamiento suave e indicador de progreso permanente.
+- Personalización de icono, posición, forma, márgenes, umbral, duración, tamaños, colores y visibilidad por dispositivo.
+- Ajustes organizados en dos columnas en escritorio y una columna en móvil; el botón nunca se carga en el administrador.
+
 ## 1.2.4
 
 - Interfaz: títulos, descripciones e interruptores alineados entre tarjetas con y sin ajustes desplegables.
