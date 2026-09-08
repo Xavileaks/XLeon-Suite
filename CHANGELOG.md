@@ -5,6 +5,7 @@
 - WordPress: nuevo botón «Volver arriba» con desplazamiento suave e indicador de progreso permanente.
 - Personalización de icono, posición, forma, márgenes, umbral, duración, tamaños, colores y visibilidad por dispositivo.
 - Ajustes organizados en dos columnas en escritorio y una columna en móvil; el botón nunca se carga en el administrador.
+- Actualizador: comprobación independiente de nuevas publicaciones cada minuto mediante WP-Cron.
 
 ## 1.2.4
 
