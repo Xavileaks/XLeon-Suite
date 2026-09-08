@@ -66,7 +66,6 @@ function xw_get_feature_definitions() {
             'title'       => xw_t( 'Volver arriba', 'Back to top' ),
             'description' => xw_t( 'Muestra un botón con progreso de lectura que regresa suavemente al inicio de la página.', 'Displays a reading-progress button that smoothly returns to the top of the page.' ),
             'settings'    => true,
-            'wide'        => true,
         ),
         'elementor_messages' => array(
             'title'       => xw_t( 'Form Elementor: mensajes flotantes', 'Form Elementor: floating messages' ),
