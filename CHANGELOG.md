@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.9
+
+- Volver arriba: se neutralizan los estilos hover globales de temas y constructores para que el botón no cambie de color, sombra ni icono al pasar el cursor.
+
 ## 1.2.8
 
 - Volver arriba: controles numéricos compactos con nombre, valor y unidad en una sola línea.

@@ -23,6 +23,18 @@
     -webkit-appearance: none;
 }
 
+/* Aísla el botón de los estilos hover globales del tema o del constructor. */
+#xw-back-to-top,
+#xw-back-to-top:hover,
+#xw-back-to-top:focus,
+#xw-back-to-top:active {
+    border: 0 !important;
+    background: conic-gradient(var(--xw-btt-progress-color) var(--xw-btt-progress), transparent 0) !important;
+    box-shadow: none !important;
+    color: var(--xw-btt-icon) !important;
+    text-decoration: none !important;
+}
+
 .xw-back-to-top::before {
     position: absolute;
     inset: var(--xw-btt-progress-size);
@@ -31,6 +43,15 @@
     background: var(--xw-btt-background);
     box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
     content: '';
+}
+
+#xw-back-to-top::before,
+#xw-back-to-top:hover::before,
+#xw-back-to-top:focus::before,
+#xw-back-to-top:active::before {
+    border-color: var(--xw-btt-border) !important;
+    background: var(--xw-btt-background) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .12) !important;
 }
 
 .xw-back-to-top:focus-visible {
@@ -71,6 +92,12 @@
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+.xw-back-to-top svg,
+.xw-back-to-top svg * {
+    fill: none !important;
+    stroke: currentColor !important;
 }
 
 @media (max-width: 767px) {
