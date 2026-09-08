@@ -31,12 +31,6 @@
     background: var(--xw-btt-background);
     box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
     content: '';
-    transition: background-color .16s ease, box-shadow .16s ease;
-}
-
-.xw-back-to-top:hover::before {
-    background: var(--xw-btt-hover);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, .16);
 }
 
 .xw-back-to-top:focus-visible {

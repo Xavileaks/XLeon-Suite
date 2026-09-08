@@ -124,11 +124,10 @@ function xw_render_back_to_top_button() {
     $border     = sanitize_hex_color( $options['border_color'] ) ?: '#DCDCDE';
     $icon_color = sanitize_hex_color( $options['icon_color'] ) ?: '#1D2327';
     $progress   = sanitize_hex_color( $options['progress_color'] ) ?: '#3858E9';
-    $hover      = sanitize_hex_color( $options['hover_color'] ) ?: '#F5F7FF';
     $button_size = max( 32, min( 100, absint( $options['button_size'] ) ) );
     $icon_size   = max( 12, min( $button_size - 8, absint( $options['icon_size'] ) ) );
     $style      = sprintf(
-        '--xw-btt-size:%dpx;--xw-btt-border-size:%dpx;--xw-btt-icon-size:%dpx;--xw-btt-progress-size:%dpx;--xw-btt-vertical-margin:%dpx;--xw-btt-horizontal-margin:%dpx;--xw-btt-background:%s;--xw-btt-border:%s;--xw-btt-icon:%s;--xw-btt-progress-color:%s;--xw-btt-hover:%s;',
+        '--xw-btt-size:%dpx;--xw-btt-border-size:%dpx;--xw-btt-icon-size:%dpx;--xw-btt-progress-size:%dpx;--xw-btt-vertical-margin:%dpx;--xw-btt-horizontal-margin:%dpx;--xw-btt-background:%s;--xw-btt-border:%s;--xw-btt-icon:%s;--xw-btt-progress-color:%s;',
         $button_size,
         max( 0, min( 10, absint( $options['border_size'] ) ) ),
         $icon_size,
@@ -138,8 +137,7 @@ function xw_render_back_to_top_button() {
         $background,
         $border,
         $icon_color,
-        $progress,
-        $hover
+        $progress
     );
     $label = xw_t( 'Volver arriba', 'Back to top' );
     ?>

@@ -202,7 +202,6 @@ function xw_get_default_settings() {
             'border_color'      => '',
             'icon_color'        => '',
             'progress_color'    => '',
-            'hover_color'       => '',
             'hide_mobile'       => 0,
             'hide_tablet'       => 0,
             'hide_desktop'      => 0,
@@ -337,7 +336,7 @@ function xw_sanitize_settings( $input ) {
     $sanitized['back_to_top']['icon_size'] = max( 12, min( $sanitized['back_to_top']['button_size'] - 8, isset( $back_to_top['icon_size'] ) ? absint( $back_to_top['icon_size'] ) : $defaults['back_to_top']['icon_size'] ) );
     $sanitized['back_to_top']['progress_size'] = max( 1, min( 10, isset( $back_to_top['progress_size'] ) ? absint( $back_to_top['progress_size'] ) : $defaults['back_to_top']['progress_size'] ) );
 
-    foreach ( array( 'background_color', 'border_color', 'icon_color', 'progress_color', 'hover_color' ) as $color_key ) {
+    foreach ( array( 'background_color', 'border_color', 'icon_color', 'progress_color' ) as $color_key ) {
         $color = isset( $back_to_top[ $color_key ] ) ? sanitize_hex_color( $back_to_top[ $color_key ] ) : '';
         $sanitized['back_to_top'][ $color_key ] = $color ? $color : '';
     }
@@ -605,65 +604,62 @@ function xw_render_settings_page() {
                                             <option value="square" <?php selected( $settings['back_to_top']['shape'], 'square' ); ?>><?php echo esc_html( xw_t( 'Cuadrado', 'Square' ) ); ?></option>
                                         </select>
                                     </div>
-                                    <div class="xw-field-row">
+                                    <div class="xw-field-row xw-btt-compact-field">
                                         <label for="xw-btt-vertical-margin"><?php echo esc_html( xw_t( 'Margen vertical', 'Vertical margin' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-vertical-margin" type="number" name="xw_settings[back_to_top][vertical_margin]" value="<?php echo esc_attr( $settings['back_to_top']['vertical_margin'] ); ?>" min="0" max="200" step="1">
                                             <span>px</span>
                                         </div>
                                     </div>
-                                    <div class="xw-field-row">
+                                    <div class="xw-field-row xw-btt-compact-field">
                                         <label for="xw-btt-horizontal-margin"><?php echo esc_html( xw_t( 'Margen horizontal', 'Horizontal margin' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-horizontal-margin" type="number" name="xw_settings[back_to_top][horizontal_margin]" value="<?php echo esc_attr( $settings['back_to_top']['horizontal_margin'] ); ?>" min="0" max="200" step="1">
                                             <span>px</span>
                                         </div>
                                     </div>
-                                    <div class="xw-field-row">
-                                        <label for="xw-btt-offset"><?php echo esc_html( xw_t( 'Mostrar después de desplazarse', 'Show after scrolling' ) ); ?></label>
+                                    <div class="xw-field-row xw-btt-compact-field">
+                                        <label for="xw-btt-offset"><?php echo esc_html( xw_t( 'Aparecer después', 'Show after' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-offset" type="number" name="xw_settings[back_to_top][offset]" value="<?php echo esc_attr( $settings['back_to_top']['offset'] ); ?>" min="0" max="5000" step="1">
                                             <span>px</span>
                                         </div>
-                                        <p><?php echo esc_html( xw_t( 'Distancia desde el inicio antes de mostrar el botón.', 'Distance from the top before showing the button.' ) ); ?></p>
                                     </div>
-                                    <div class="xw-field-row">
-                                        <label for="xw-btt-duration"><?php echo esc_html( xw_t( 'Duración del desplazamiento', 'Scroll duration' ) ); ?></label>
+                                    <div class="xw-field-row xw-btt-compact-field">
+                                        <label for="xw-btt-duration"><?php echo esc_html( xw_t( 'Duración', 'Duration' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-duration" type="number" name="xw_settings[back_to_top][duration]" value="<?php echo esc_attr( $settings['back_to_top']['duration'] ); ?>" min="0" max="3000" step="50">
                                             <span>ms</span>
                                         </div>
                                     </div>
 
-                                    <h3 class="xw-options-heading"><?php echo esc_html( xw_t( 'Tamaño y apariencia', 'Size and appearance' ) ); ?></h3>
-                                    <div class="xw-field-row">
-                                        <label for="xw-btt-button-size"><?php echo esc_html( xw_t( 'Tamaño del botón', 'Button size' ) ); ?></label>
+                                    <div class="xw-field-row xw-btt-compact-field">
+                                        <label for="xw-btt-button-size"><?php echo esc_html( xw_t( 'Botón', 'Button' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-button-size" type="number" name="xw_settings[back_to_top][button_size]" value="<?php echo esc_attr( $settings['back_to_top']['button_size'] ); ?>" min="32" max="100" step="1">
                                             <span>px</span>
                                         </div>
                                     </div>
-                                    <div class="xw-field-row">
-                                        <label for="xw-btt-icon-size"><?php echo esc_html( xw_t( 'Tamaño del icono', 'Icon size' ) ); ?></label>
+                                    <div class="xw-field-row xw-btt-compact-field">
+                                        <label for="xw-btt-icon-size"><?php echo esc_html( xw_t( 'Icono', 'Icon' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-icon-size" type="number" name="xw_settings[back_to_top][icon_size]" value="<?php echo esc_attr( $settings['back_to_top']['icon_size'] ); ?>" min="12" max="92" step="1">
                                             <span>px</span>
                                         </div>
                                     </div>
-                                    <div class="xw-field-row">
-                                        <label for="xw-btt-border-size"><?php echo esc_html( xw_t( 'Grosor del borde', 'Border size' ) ); ?></label>
+                                    <div class="xw-field-row xw-btt-compact-field">
+                                        <label for="xw-btt-border-size"><?php echo esc_html( xw_t( 'Borde', 'Border' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-border-size" type="number" name="xw_settings[back_to_top][border_size]" value="<?php echo esc_attr( $settings['back_to_top']['border_size'] ); ?>" min="0" max="10" step="1">
                                             <span>px</span>
                                         </div>
                                     </div>
-                                    <div class="xw-field-row">
-                                        <label for="xw-btt-progress-size"><?php echo esc_html( xw_t( 'Grosor del progreso', 'Progress size' ) ); ?></label>
+                                    <div class="xw-field-row xw-btt-compact-field">
+                                        <label for="xw-btt-progress-size"><?php echo esc_html( xw_t( 'Progreso', 'Progress' ) ); ?></label>
                                         <div class="xw-number-control">
                                             <input id="xw-btt-progress-size" type="number" name="xw_settings[back_to_top][progress_size]" value="<?php echo esc_attr( $settings['back_to_top']['progress_size'] ); ?>" min="1" max="10" step="1">
                                             <span>px</span>
                                         </div>
-                                        <p><?php echo esc_html( xw_t( 'El indicador de progreso permanece siempre activo.', 'The progress indicator is always active.' ) ); ?></p>
                                     </div>
 
                                     <?php
@@ -672,7 +668,6 @@ function xw_render_settings_page() {
                                         'border_color'     => array( xw_t( 'Color del borde', 'Border color' ), '#DCDCDE' ),
                                         'icon_color'       => array( xw_t( 'Color del icono', 'Icon color' ), '#1D2327' ),
                                         'progress_color'   => array( xw_t( 'Color del progreso', 'Progress color' ), '#3858E9' ),
-                                        'hover_color'      => array( xw_t( 'Color al pasar el cursor', 'Hover color' ), '#F5F7FF' ),
                                     );
                                     ?>
                                     <?php foreach ( $back_to_top_colors as $color_key => $color_data ) : ?>
@@ -685,28 +680,23 @@ function xw_render_settings_page() {
                                         </div>
                                     <?php endforeach; ?>
 
-                                    <h3 class="xw-options-heading"><?php echo esc_html( xw_t( 'Visibilidad por dispositivo', 'Visibility by device' ) ); ?></h3>
-                                    <div class="xw-field-row">
-                                        <label class="xw-check-control">
-                                            <input type="checkbox" name="xw_settings[back_to_top][hide_mobile]" value="1" <?php checked( ! empty( $settings['back_to_top']['hide_mobile'] ) ); ?>>
-                                            <span><?php echo esc_html( xw_t( 'Ocultar en móvil', 'Hide on mobile' ) ); ?></span>
-                                        </label>
-                                        <p><?php echo esc_html( xw_t( 'Hasta 767 px.', 'Up to 767 px.' ) ); ?></p>
-                                    </div>
-                                    <div class="xw-field-row">
-                                        <label class="xw-check-control">
-                                            <input type="checkbox" name="xw_settings[back_to_top][hide_tablet]" value="1" <?php checked( ! empty( $settings['back_to_top']['hide_tablet'] ) ); ?>>
-                                            <span><?php echo esc_html( xw_t( 'Ocultar en tablet', 'Hide on tablet' ) ); ?></span>
-                                        </label>
-                                        <p><?php echo esc_html( xw_t( 'Entre 768 y 991 px.', 'Between 768 and 991 px.' ) ); ?></p>
-                                    </div>
-                                    <div class="xw-field-row">
-                                        <label class="xw-check-control">
-                                            <input type="checkbox" name="xw_settings[back_to_top][hide_desktop]" value="1" <?php checked( ! empty( $settings['back_to_top']['hide_desktop'] ) ); ?>>
-                                            <span><?php echo esc_html( xw_t( 'Ocultar en escritorio', 'Hide on desktop' ) ); ?></span>
-                                        </label>
-                                        <p><?php echo esc_html( xw_t( 'Desde 992 px.', 'From 992 px.' ) ); ?></p>
-                                    </div>
+                                    <fieldset class="xw-btt-visibility xw-field-full">
+                                        <legend><?php echo esc_html( xw_t( 'Ocultar visibilidad por dispositivo', 'Hide visibility by device' ) ); ?></legend>
+                                        <div class="xw-btt-visibility-grid">
+                                            <label class="xw-check-control">
+                                                <input type="checkbox" name="xw_settings[back_to_top][hide_mobile]" value="1" <?php checked( ! empty( $settings['back_to_top']['hide_mobile'] ) ); ?>>
+                                                <span><?php echo esc_html( xw_t( 'Móvil', 'Mobile' ) ); ?></span>
+                                            </label>
+                                            <label class="xw-check-control">
+                                                <input type="checkbox" name="xw_settings[back_to_top][hide_tablet]" value="1" <?php checked( ! empty( $settings['back_to_top']['hide_tablet'] ) ); ?>>
+                                                <span>Tablet</span>
+                                            </label>
+                                            <label class="xw-check-control">
+                                                <input type="checkbox" name="xw_settings[back_to_top][hide_desktop]" value="1" <?php checked( ! empty( $settings['back_to_top']['hide_desktop'] ) ); ?>>
+                                                <span><?php echo esc_html( xw_t( 'Escritorio', 'Desktop' ) ); ?></span>
+                                            </label>
+                                        </div>
+                                    </fieldset>
                                 <?php elseif ( 'admin_branding' === $key ) : ?>
                                     <div class="xw-field-row xw-field-full xw-footer-editor">
                                         <label for="xw-admin-footer-html"><?php echo esc_html( xw_t( 'Texto del pie', 'Footer text' ) ); ?></label>

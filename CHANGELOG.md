@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.2.8
+
+- Volver arriba: controles numéricos compactos con nombre, valor y unidad en una sola línea.
+- Los controles de visibilidad móvil, tablet y escritorio aparecen juntos en una sola fila.
+- Se elimina la opción y el efecto de color al pasar el cursor sobre el botón.
+
 ## 1.2.7
 
 - Interfaz: la tarjeta «Volver arriba» ocupa la columna disponible junto a «Marca del administrador» y mantiene una sola columna en móvil.

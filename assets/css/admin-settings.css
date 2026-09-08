@@ -258,6 +258,29 @@
     font-weight: 600;
 }
 
+.xw-btt-compact-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 0;
+}
+
+.xw-btt-compact-field > label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.xw-btt-compact-field .xw-number-control {
+    flex: 0 0 auto;
+    gap: 6px;
+}
+
+.xw-btt-compact-field .xw-number-control input[type="number"] {
+    width: 64px;
+    min-height: 36px;
+}
+
 .xw-text-control input {
     width: 100%;
     min-height: 40px;
@@ -355,6 +378,32 @@
 
 .xw-check-control input {
     margin: 0;
+}
+
+.xw-btt-visibility {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.xw-btt-visibility > legend {
+    margin-bottom: 9px;
+    color: #1d2327;
+    font-weight: 600;
+}
+
+.xw-btt-visibility-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.xw-btt-visibility-grid .xw-check-control {
+    justify-content: center;
+    min-width: 0;
+    padding: 0 6px;
+    font-size: 12px;
+    white-space: nowrap;
 }
 
 .xw-footer-editor .wp-editor-wrap {
