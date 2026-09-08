@@ -90,7 +90,8 @@ function xw_enqueue_back_to_top_assets() {
     );
 }
 
-add_action( 'wp_footer', 'xw_render_back_to_top_button', 80 );
+// Se imprime antes de los scripts del pie (prioridad 20 de WordPress).
+add_action( 'wp_footer', 'xw_render_back_to_top_button', 10 );
 /**
  * Imprime el control accesible al final del documento público.
  *

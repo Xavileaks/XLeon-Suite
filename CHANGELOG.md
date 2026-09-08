@@ -1,5 +1,10 @@
 # Historial de cambios
 
+## 1.2.6
+
+- Volver arriba: se corrige la inicialización cuando WordPress u otro optimizador imprime el script antes del botón.
+- El botón se renderiza antes de los scripts del pie y JavaScript espera al DOM como protección adicional.
+
 ## 1.2.5
 
 - WordPress: nuevo botón «Volver arriba» con desplazamiento suave e indicador de progreso permanente.
