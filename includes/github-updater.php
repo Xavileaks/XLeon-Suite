@@ -9,11 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'XW_GITHUB_REPOSITORY', 'Xavileaks/XLeon-Suite' );
 define( 'XW_GITHUB_RELEASE_ASSET', 'xleon-suite.zip' );
-define( 'XW_GITHUB_UPDATE_INTERVAL', MINUTE_IN_SECONDS );
-define( 'XW_GITHUB_UPDATE_CRON_HOOK', 'xw_github_minute_update_check' );
+define( 'XW_GITHUB_UPDATE_INTERVAL', 10 * MINUTE_IN_SECONDS );
+define( 'XW_GITHUB_UPDATE_CRON_HOOK', 'xw_github_ten_minute_update_check' );
 
 /**
- * Obtiene la última publicación estable y la conserva durante un minuto.
+ * Obtiene la última publicación estable y la conserva durante diez minutos.
  *
  * @param bool $force_refresh Ignorar la caché guardada.
  * @return array|WP_Error
@@ -125,20 +125,20 @@ function xw_github_check_for_update( $transient ) {
 add_filter( 'pre_set_site_transient_update_plugins', 'xw_github_check_for_update' );
 
 /**
- * Añade una frecuencia de un minuto sin modificar el cron de otros plugins.
+ * Añade una frecuencia de diez minutos sin modificar el cron de otros plugins.
  *
  * @param array $schedules Frecuencias registradas.
  * @return array
  */
-function xw_github_add_minute_schedule( $schedules ) {
-    $schedules['xw_one_minute'] = array(
+function xw_github_add_ten_minute_schedule( $schedules ) {
+    $schedules['xw_ten_minutes'] = array(
         'interval' => XW_GITHUB_UPDATE_INTERVAL,
-        'display'  => xw_t( 'Cada minuto', 'Every minute' ),
+        'display'  => xw_t( 'Cada diez minutos', 'Every ten minutes' ),
     );
 
     return $schedules;
 }
-add_filter( 'cron_schedules', 'xw_github_add_minute_schedule' );
+add_filter( 'cron_schedules', 'xw_github_add_ten_minute_schedule' );
 
 /**
  * Programa la comprobación. También se ejecuta en init para instalaciones
@@ -150,7 +150,7 @@ function xw_github_schedule_update_checks() {
     if ( ! wp_next_scheduled( XW_GITHUB_UPDATE_CRON_HOOK ) ) {
         wp_schedule_event(
             time() + XW_GITHUB_UPDATE_INTERVAL,
-            'xw_one_minute',
+            'xw_ten_minutes',
             XW_GITHUB_UPDATE_CRON_HOOK
         );
     }
@@ -174,7 +174,7 @@ register_deactivation_hook( XW_FUNCTIONS_FILE, 'xw_github_unschedule_update_chec
  * @return void
  */
 function xw_github_refresh_update_transient() {
-    $lock_key = 'xw_github_minute_update_lock';
+    $lock_key = 'xw_github_ten_minute_update_lock';
 
     if ( false !== get_site_transient( $lock_key ) ) {
         return;
@@ -231,7 +231,7 @@ add_action( XW_GITHUB_UPDATE_CRON_HOOK, 'xw_github_refresh_update_transient' );
 
 /**
  * Permite que el aviso ya esté preparado al entrar en la administración.
- * El bloqueo interno impide más de una consulta por minuto.
+ * El bloqueo interno impide más de una consulta cada diez minutos.
  *
  * @return void
  */
@@ -344,6 +344,6 @@ function xw_github_clear_release_cache( $upgrader, $options ) {
     }
 
     delete_site_transient( 'xw_github_latest_release' );
-    delete_site_transient( 'xw_github_minute_update_lock' );
+    delete_site_transient( 'xw_github_ten_minute_update_lock' );
 }
 add_action( 'upgrader_process_complete', 'xw_github_clear_release_cache', 10, 2 );
