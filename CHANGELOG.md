@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.7
+
+- Interfaz: la tarjeta «Volver arriba» ocupa la columna disponible junto a «Marca del administrador» y mantiene una sola columna en móvil.
+
 ## 1.2.6
 
 - Volver arriba: se corrige la inicialización cuando WordPress u otro optimizador imprime el script antes del botón.
