@@ -1,5 +1,12 @@
 # Historial de cambios
 
+## 1.2.11
+
+- WooCommerce: opción para mostrar miniaturas de producto de 55 × 55 píxeles junto al nombre en el resumen del checkout.
+- WooCommerce: opción para ocultar el cálculo y los costes de envío únicamente en el carrito, conservándolos en el checkout.
+- WooCommerce: opción para exigir a usuarios conectados el correo de su cuenta como campo obligatorio y de solo lectura en el checkout, con validación del servidor.
+- Las tres funciones nuevas están desactivadas por defecto y sus textos se adaptan al español o inglés de WordPress.
+
 ## 1.2.10
 
 - Volver arriba: el botón queda aislado del CSS de temas, constructores y otros plugins para conservar su forma y sus estados.
