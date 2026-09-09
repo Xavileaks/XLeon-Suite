@@ -1,5 +1,12 @@
 # Historial de cambios
 
+## 1.2.10
+
+- Volver arriba: el botón queda aislado del CSS de temas, constructores y otros plugins para conservar su forma y sus estados.
+- El anillo de progreso y el círculo comparten una única sombra exterior.
+- El progreso SVG uniforme se aplica a las formas circular, redondeada y cuadrada, comenzando en el centro superior.
+- Eliminado el sistema anterior basado en degradados para todas las formas.
+
 ## 1.2.9
 
 - Volver arriba: se neutralizan los estilos hover globales de temas y constructores para que el botón no cambie de color, sombra ni icono al pasar el cursor.
