@@ -3,7 +3,7 @@
 Plugin Name: XLeon Suite
 Plugin URI: https://github.com/Xavileaks/XLeon-Suite
 Description: Modular WordPress features and global assets.
-Version: 1.2.17
+Version: 1.2.18
 Author: Xavier Leon
 Author URI: https://xavileeon.com
 Update URI: https://github.com/Xavileaks/XLeon-Suite
@@ -14,7 +14,7 @@ Text Domain: xleon-suite
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'XW_FUNCTIONS_VERSION', '1.2.17' );
+define( 'XW_FUNCTIONS_VERSION', '1.2.18' );
 define( 'XW_FUNCTIONS_FILE', __FILE__ );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin-settings.php';
@@ -1103,6 +1103,19 @@ function xw_enqueue_woocommerce_checkout_styles() {
         array(),
         filemtime( $file_path )
     );
+
+    $script_relative_path = 'assets/js/woocommerce-checkout.js';
+    $script_file_path     = plugin_dir_path( __FILE__ ) . $script_relative_path;
+
+    if ( file_exists( $script_file_path ) ) {
+        wp_enqueue_script(
+            'xw-woocommerce-checkout-layout',
+            plugin_dir_url( __FILE__ ) . $script_relative_path,
+            array(),
+            filemtime( $script_file_path ),
+            true
+        );
+    }
 }
 
 
