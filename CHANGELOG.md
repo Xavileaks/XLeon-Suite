@@ -1,5 +1,10 @@
 # Historial de cambios
 
+## 1.2.27
+
+- Elementor Menu Cart: se añade espacio superior al listado para mostrar completa la insignia de cantidad del primer producto.
+- El botón de eliminar queda separado 10 px del carril de desplazamiento sin modificar la distribución del producto.
+
 ## 1.2.26
 
 - Elementor Menu Cart: la altura de línea del título responde exactamente al valor configurado en el control Typography de Elementor.
