@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.2.31
+
+- Nueva función independiente “Botón flotante de WhatsApp”, desactivada por defecto.
+- Permite indicar el número internacional y configurar posición, forma, márgenes, aparición, duración, tamaños, borde, colores y visibilidad por dispositivo.
+- Abre la conversación mediante el enlace oficial `wa.me`, omite los controles de progreso y evita superponerse con “Volver arriba” cuando ambos botones comparten el mismo lado.
+
 ## 1.2.30
 
 - “WooCommerce Shipping” vuelve al ancho normal de las demás funciones y deja de ocupar toda la fila.
