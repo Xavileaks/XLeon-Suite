@@ -1,5 +1,12 @@
 # Historial de cambios
 
+## 1.2.32
+
+- Nueva función “Variation Swatches” para producto individual, con etiquetas, colores e imágenes configurables.
+- Añade tooltips de texto, imagen o ambos y detección automática de imágenes de variaciones locales.
+- Incorpora alineación y padding independientes para las etiquetas de atributos.
+- Permite definir los colores normal y hover del enlace “Clear / Limpiar”.
+
 ## 1.2.31
 
 - Nueva función independiente “Botón flotante de WhatsApp”, desactivada por defecto.
