@@ -1,5 +1,10 @@
 # Historial de cambios
 
+## 1.2.33
+
+- Corrige los swatches de imagen en productos con muchas combinaciones de variaciones.
+- Normaliza los valores de atributos locales para asociar correctamente imágenes aunque WooCommerce cambie mayúsculas, espacios o caracteres especiales.
+
 ## 1.2.32
 
 - Nueva función “Variation Swatches” para producto individual, con etiquetas, colores e imágenes configurables.
