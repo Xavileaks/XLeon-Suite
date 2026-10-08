@@ -1,5 +1,13 @@
 # Historial de cambios
 
+## 1.2.38
+
+- Añade el módulo opcional Wishlist de Elementor, apagado por defecto, con tres widgets: tabla, contador y añadir producto.
+- Guarda variaciones seleccionadas y sus atributos exactos; soporta combinaciones independientes, añadir al carrito y retirar solo los productos confirmados con aviso flotante de 5 segundos.
+- Incorpora tabla/tarjetas responsive, contador circular editable y compartir mediante enlaces públicos de solo lectura en nueve servicios.
+- Separa el nombre del producto de sus opciones y permite editar la tipografía por dispositivo, color, hover y separación de la variación dentro de Product name.
+- No reemplaza listas de otros plugins ni cambia plantillas existentes.
+
 ## 1.2.37
 
 - Mantiene todas las cajas, incluida WebP - Compress, en dos columnas en escritorio y a ancho completo en tablet y móvil.
