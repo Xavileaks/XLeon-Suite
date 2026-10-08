@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.2.39
+
+- Wishlist: etiquetas de variación en negrita y valores normales separados con `|`, en el orden de atributos del producto.
+- Dentro de Product name, las opciones de variación permiten cambiar solo el tamaño por dispositivo y el color. Conserva los tamaños y colores ya guardados.
+- Los valores con comas, barras o símbolos se muestran íntegros como texto, sin interpretar HTML ni alterar las selecciones guardadas.
+
 ## 1.2.38
 
 - Añade el módulo opcional Wishlist de Elementor, apagado por defecto, con tres widgets: tabla, contador y añadir producto.
