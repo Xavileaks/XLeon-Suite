@@ -1,5 +1,10 @@
 # Historial de cambios
 
+## 1.2.40
+
+- Imágenes cuadradas 1:1 con object-fit contain en carrito, mini carrito y Menu Cart de Elementor, respetando el ancho configurado.
+- Aplica contain y aspect-ratio 1:1 a las imágenes del checkout con o sin Checkout CSS, manteniendo sus tamaños responsive.
+
 ## 1.2.39
 
 - Wishlist: etiquetas de variación en negrita y valores normales separados con `|`, en el orden de atributos del producto.
