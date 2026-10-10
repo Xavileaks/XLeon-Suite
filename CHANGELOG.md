@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.2.41
+
+- Botón Guardar cambios gris/desactivado sin cambios pendientes y azul al editar, incluyendo controles dinámicos, colores y medios.
+- Guardado AJAX sin recarga ni salto de scroll, con feedback accesible, recuperación de errores y protección de ediciones realizadas durante una petición.
+- Reutiliza permisos, nonce y sanitización; rechaza peticiones incompletas o fallos de persistencia.
+
 ## 1.2.40
 
 - Imágenes cuadradas 1:1 con object-fit contain en carrito, mini carrito y Menu Cart de Elementor, respetando el ancho configurado.
