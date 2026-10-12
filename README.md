@@ -2,6 +2,12 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Comentarios: caja y desplegable de la suite (1.2.48)
+
+**WordPress > Comentarios** sigue el mismo patrón que las demás funciones: interruptor principal, flecha al encender y cuatro opciones dentro del desplegable. Las opciones interiores se distribuyen en dos columnas en escritorio (>1024 px) y una en tablet/móvil, sin cambiar las dos cajas por fila de escritorio.
+
+Apagar el módulo suspende las restricciones y cierra el desplegable, pero conserva todas las selecciones. Al actualizar desde la caja anterior se mantiene activo si ya había alguna restricción seleccionada; una configuración inactiva sigue apagada. Usa el guardado AJAX existente y no borra comentarios.
+
 ## Cantidad: anchos independientes y centrado (1.2.47)
 
 Corrige **Quantity Plus Minus Button** cuando el tema o Elementor fija el ancho/flex del contenedor: `Input width` se aplica solo al campo y `Button width` a cada botón, sin repartir ni encoger esas medidas. El grupo ocupa la suma de sus tres controles y la cantidad permanece centrada, también en carrito y selectores nativos de bloques.
