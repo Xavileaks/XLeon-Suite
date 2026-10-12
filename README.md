@@ -2,6 +2,12 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Pedidos en el menú principal (1.2.51)
+
+Nueva caja opcional **WooCommerce > Pedidos en el menú principal**, apagada por defecto. Mueve el acceso nativo de Pedidos justo debajo de WooCommerce, antes de Productos, fuera del submenú. Conserva el idioma y contador de WooCommerce y sus permisos; no crea otra pantalla ni modifica pedidos. Compatible con HPOS y almacenamiento clásico, listado y editor. Solo retira la entrada visual del submenú al renderizar el encabezado, después de que WordPress haya comprobado la autorización y los hooks nativos de HPOS.
+
+Al apagar y guardar vuelve al submenú original. Guarda por AJAX; el menú refleja la configuración al navegar o recargar. No hace nada sin WooCommerce, sin el menú nativo o sin permisos, y respeta accesos independientes ya registrados por terceros. Caja en dos columnas de escritorio y una en tablet/móvil. Pruebas locales en `tests/orders-menu.php`, excluidas del ZIP.
+
 ## Icono de Rank Math en la barra (1.2.50)
 
 **Compact admin bar style** neutraliza el desplazamiento propio de 6 px del contenedor `.rank-math-icon`, que no utiliza la clase nativa `.ab-icon`. El SVG queda centrado en escritorio sin cambiar el espacio entre icono y texto, el hover ni los desplegables. La corrección queda dentro del breakpoint de escritorio; móvil conserva la barra de 46 px. Verificado con el marcado y la regla inline observados en el sitio, incluida su carga después del CSS de la suite, y menús con Enter/Escape. Fixture local en `tests/admin-bar-icons-fixture.php`, excluido de la publicación.
