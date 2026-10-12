@@ -3,7 +3,7 @@
 Plugin Name: XLeon Suite
 Plugin URI: https://github.com/Xavileaks/XLeon-Suite
 Description: Modular WordPress features and global assets.
-Version: 1.2.43
+Version: 1.2.44
 Author: Xavier Leon
 Author URI: https://xavileeon.com
 Update URI: https://github.com/Xavileaks/XLeon-Suite
@@ -14,7 +14,7 @@ Text Domain: xleon-suite
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'XW_FUNCTIONS_VERSION', '1.2.43' );
+define( 'XW_FUNCTIONS_VERSION', '1.2.44' );
 define( 'XW_FUNCTIONS_FILE', __FILE__ );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin-settings.php';
@@ -305,35 +305,13 @@ show_admin_bar(false);
 // BARRA SUPERIOR
 
 if ( xw_feature_enabled( 'admin_bar_style' ) ) {
-    add_action('admin_head','xl_adminbar_font_12_and_align');
-    add_action('wp_head','xl_adminbar_font_12_and_align');
+    add_action('admin_enqueue_scripts','xl_adminbar_font_12_and_align', 30);
+    add_action('wp_enqueue_scripts','xl_adminbar_font_12_and_align', 30);
 }
 function xl_adminbar_font_12_and_align() {
-    if (!is_user_logged_in()) return;
-    echo '<style>
-    #wpadminbar,
-    #wpadminbar *{
-        font-size:11px!important;
-        top:0!important;
-    }
-    .ab-sub-wrapper{
-        margin-top:32px!important;
-    }
-    #wpadminbar .ab-item,
-    #wpadminbar .ab-label,
-    #wpadminbar .ab-sub-wrapper a{
-        display:flex!important;
-        align-items:center!important;
-    }
-    .ab-item:before{
-        font-size:16px!important;
-        inset-block-start:0!important;
-    }
-    #wpadminbar .ab-icon:before{
-        font-size:16px!important;
-        top:0!important;
-    }
-    </style>';
+    if ( ! xw_feature_enabled( 'admin_bar_style' ) || ! is_user_logged_in() || ! is_admin_bar_showing() ) return;
+    $relative = 'assets/admin-bar/compact.css';
+    wp_enqueue_style( 'xw-compact-admin-bar', plugin_dir_url( XW_FUNCTIONS_FILE ) . $relative, array( 'admin-bar' ), filemtime( plugin_dir_path( XW_FUNCTIONS_FILE ) . $relative ) );
 }
 
 
