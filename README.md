@@ -2,6 +2,14 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Cantidades, barra y limpieza de módulos (1.2.49)
+
+**Quantity Plus Minus Button** añade forma Normal/Circular, radio independiente del campo y separación (Gap) de 0–40 px. Circular usa el ancho como diámetro y radio de 50 %, manteniendo la altura del campo independiente. Normal conserva el alto configurado y el radio de botón. Configuraciones anteriores con radio de botón de 100 px pasan a Circular; una selección explícita Normal se respeta. Gap inicial de 4 px, configurable a 0. Sigue centrado, sin foco negro al hacer clic y sin duplicar botones de bloques.
+
+**Compact admin bar style** corrige las cajas de iconos de escritorio: padding nativo neutralizado y glifos centrados en 32 px, incluidos SVG. Mantiene las reglas móviles de 46 px separadas y no reposiciona los desplegables de escritorio.
+
+Retirados **Loading transition** y **Export plugin** de la pantalla, los valores activos y el código de ejecución: no hay ocultación/fade del body ni botón, generador ZIP o endpoint de exportación. Los demás módulos y las dos columnas de escritorio no cambian. La versión anterior del código sigue disponible en Git.
+
 ## Comentarios: caja y desplegable de la suite (1.2.48)
 
 **WordPress > Comentarios** sigue el mismo patrón que las demás funciones: interruptor principal, flecha al encender y cuatro opciones dentro del desplegable. Las opciones interiores se distribuyen en dos columnas en escritorio (>1024 px) y una en tablet/móvil, sin cambiar las dos cajas por fila de escritorio.
