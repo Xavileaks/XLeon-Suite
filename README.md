@@ -2,6 +2,10 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Icono de carrito para Pedidos (1.2.52)
+
+El acceso independiente de **Pedidos** usa el carrito de compras nativo de WordPress (`dashicons-cart`) en lugar del portapapeles. Mantiene la ubicación debajo de WooCommerce, contador, permisos y funcionamiento de HPOS y pedidos clásicos.
+
 ## Pedidos en el menú principal (1.2.51)
 
 Nueva caja opcional **WooCommerce > Pedidos en el menú principal**, apagada por defecto. Mueve el acceso nativo de Pedidos justo debajo de WooCommerce, antes de Productos, fuera del submenú. Conserva el idioma y contador de WooCommerce y sus permisos; no crea otra pantalla ni modifica pedidos. Compatible con HPOS y almacenamiento clásico, listado y editor. Solo retira la entrada visual del submenú al renderizar el encabezado, después de que WordPress haya comprobado la autorización y los hooks nativos de HPOS.
