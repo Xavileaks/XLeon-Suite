@@ -2,6 +2,12 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Scrollbar y actualizaciones (1.2.53)
+
+El ancho predeterminado de la scrollbar es **5 px** para configuraciones nuevas o sin ancho definido; los valores ya guardados, incluido 0, se conservan. El control sigue siendo configurable.
+
+La comprobación de actualizaciones, caché de GitHub y bloqueo de consultas pasan a **5 minutos**. Las instalaciones existentes migran el evento anterior de 10 minutos al nuevo en `init`, sin duplicarlo ni modificar eventos ajenos; se invalidan la caché y el bloqueo antiguos. La desactivación limpia ambos eventos de la suite. WP-Cron depende de las visitas: no garantiza comprobaciones ni instalaciones automáticas en un minuto exacto.
+
 ## Icono de carrito para Pedidos (1.2.52)
 
 El acceso independiente de **Pedidos** usa el carrito de compras nativo de WordPress (`dashicons-cart`) en lugar del portapapeles. Mantiene la ubicación debajo de WooCommerce, contador, permisos y funcionamiento de HPOS y pedidos clásicos.
@@ -88,7 +94,7 @@ Las pruebas en `tests/wishlist-*` requieren WordPress aislado con `WP_ENVIRONMEN
 
 ## Actualizaciones desde GitHub
 
-El plugin consulta cada diez minutos la última publicación estable de este repositorio mediante WP-Cron. Si la versión publicada es mayor que la instalada, la actualización aparece en **Plugins > Plugins instalados** y puede aplicarse con **Actualizar ahora** o mediante las actualizaciones automáticas de WordPress. Como WP-Cron depende de la actividad del sitio, la comprobación se ejecuta durante la primera visita recibida después de cumplirse el intervalo.
+El plugin consulta cada cinco minutos la última publicación estable de este repositorio mediante WP-Cron. Si la versión publicada es mayor que la instalada, la actualización aparece en **Plugins > Plugins instalados** y puede aplicarse con **Actualizar ahora** o mediante las actualizaciones automáticas de WordPress. Como WP-Cron depende de la actividad del sitio, la comprobación se ejecuta durante la primera visita recibida después de cumplirse el intervalo.
 
 La instalación inicial del plugin sigue haciéndose una sola vez con el ZIP. A partir de ese momento, las versiones nuevas llegan desde GitHub Releases.
 
