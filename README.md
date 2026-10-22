@@ -2,6 +2,12 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Form Elementor: fecha (1.2.55)
+
+Nueva caja opcional **Elementor > Form Elementor: fecha**, apagada por defecto, sin controles adicionales. General para todos los formularios Elementor del sitio: no depende de un dominio, página ni ID. Activa escritura `dd/mm/aaaa` con separadores automáticos e `inputmode="numeric"`, manteniendo el input `date`, su icono y el selector nativo original. Conserva el nombre original y envía una sola fecha ISO (`aaaa-mm-dd`), incluidos los campos nativos que genera Flatpickr en móvil; no convierte los calendarios Flatpickr de escritorio ni otros pickers personalizados. No afecta a hora/datetime ni a campos ajenos a Elementor.
+
+Respeta obligatoriedad, límites mínimo/máximo, paso, campos desactivados y de solo lectura. Rechaza fechas parciales/imposibles, sincroniza selecciones del calendario y restablecimientos, y detecta campos de popups/contenido dinámico sin duplicarlos. Etiqueta accesible del calendario y foco de teclado con subrayado, sin nueva sombra. Funciona independientemente de Global CSS, usa el guardado AJAX existente y conserva las dos columnas de escritorio y una en tablet/móvil. Las pruebas no envían formularios y validan la serialización con Flatpickr 4.6.13; el teclado del sistema necesita confirmación en un teléfono físico. Apagar el módulo restaura el comportamiento original al cargar de nuevo la página. No instala actualizaciones en sitios.
+
 ## Foco de formularios Elementor (1.2.54)
 
 **Global CSS styles** elimina automáticamente el `box-shadow` de los campos de Elementor Form al recibir foco, sin añadir otra opción. Se limita a `.elementor-widget-form .elementor-form .elementor-field:focus`: inputs, selects y textarea. No modifica bordes, colores ni outline configurados, ni campos de otros formularios. Depende del interruptor existente; apagado no carga esta regla. Prueba local sin envíos en `tests/elementor-form-focus.php`, excluida del ZIP.
