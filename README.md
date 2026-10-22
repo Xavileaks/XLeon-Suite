@@ -2,6 +2,10 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Foco de formularios Elementor (1.2.54)
+
+**Global CSS styles** elimina automáticamente el `box-shadow` de los campos de Elementor Form al recibir foco, sin añadir otra opción. Se limita a `.elementor-widget-form .elementor-form .elementor-field:focus`: inputs, selects y textarea. No modifica bordes, colores ni outline configurados, ni campos de otros formularios. Depende del interruptor existente; apagado no carga esta regla. Prueba local sin envíos en `tests/elementor-form-focus.php`, excluida del ZIP.
+
 ## Scrollbar y actualizaciones (1.2.53)
 
 El ancho predeterminado de la scrollbar es **5 px** para configuraciones nuevas o sin ancho definido; los valores ya guardados, incluido 0, se conservan. El control sigue siendo configurable.
