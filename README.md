@@ -2,6 +2,22 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Form Elementor: citas (1.2.56)
+
+Nueva caja **Elementor > Form Elementor: citas**, apagada por defecto. Al activarla aparece **Citas / Appointments** debajo de Comentarios (posición 25.1), con acceso exclusivo de administradores. Una agenda por sitio; no depende de un dominio, página o ID fijo. Requiere el widget Formulario de Elementor Pro o una implementación compatible con su API.
+
+1. Activa la utilidad en la suite y guarda. En **Citas** configura horarios por día (`09:00-13:00, 15:00-18:00`); vacío significa cerrado. Inicialmente todos están cerrados.
+2. Define duración (5–240 min), antelación (0–10080 min), horizonte (1–180 días) y excepciones `AAAA-MM-DD`, una por línea. Se usa la zona horaria de WordPress, visible en el formulario; no la hora del navegador.
+3. En cada formulario que deba recibir reservas, añade **un** campo de tipo **Cita / Appointment**. Los demás formularios no cambian. Detecta primer texto/nombre, email y teléfono, con IDs opcionales para mapear campos distintos. Guarda los campos ordinarios del formulario, no contraseñas, uploads, campos ocultos ni CAPTCHA.
+4. El visitante abre el calendario al tocar el campo o icono, sin escribir fechas. Reutiliza el Flatpickr incluido en Elementor, también en móvil (sin sustitución nativa); círculos en días disponibles, días pasados/bloqueados/sin huecos en gris, y selección posterior de una hora libre. No afecta al módulo de fecha numérica ni a otros campos Date.
+5. El envío AJAX correcto de Elementor registra una solicitud **pendiente**, visible en la tabla privada con datos, búsqueda, filtros, paginación y estados pendiente/confirmada/completada/cancelada. Cancelar libera el horario; una cancelada no se reactiva sin una nueva reserva. El panel guarda por AJAX con botón gris cuando no hay cambios.
+
+Validación y disponibilidad en servidor; almacenamiento UTC con zona original, intervalos sin solapamiento, cambios de horario de verano, comprobación de citas existentes incluso tras cambiar duración, y mutex atómico de base de datos entre comprobar e insertar. Reserva temporal durante las acciones del formulario: si fallan o se interrumpe la petición, se libera; las reservas temporales caducan a los 10 minutos. Límite adicional de 30 intentos por IP anonimizada cada 10 min; **configura también CAPTCHA/honeypot y consentimiento en Elementor**. El endpoint público devuelve solo fechas/horas/zona, nunca personas ni registros.
+
+Permisos `manage_options`, nonces en cambios administrativos, consultas preparadas y salida escapada. Exportación y anonimización por correo con las herramientas de privacidad de WordPress, también con la utilidad apagada. No borra reservas al apagar, no cifra la base de datos ni sustituye la política de conservación/copias/seguridad del sitio. Las citas anonimizadas conservan el horario, sin cancelar automáticamente. Los correos siguen siendo las acciones configuradas en Elementor; cambiar estados no envía avisos, no hay pagos ni sincronización con calendarios externos ni múltiples profesionales. Cambiar horarios no cancela citas anteriores.
+
+Interfaz integrada con la suite: dos cajas por fila en escritorio >1024px, una en tablet/móvil; tabla con desplazamiento contenido. Pruebas CLI en `tests/appointments.php`, concurrencia con dos procesos en `tests/appointments-race-worker.php` y fixtures locales con Elementor real, todos excluidos del ZIP. No instala ni configura sitios de producción automáticamente.
+
 ## Form Elementor: fecha (1.2.55)
 
 Nueva caja opcional **Elementor > Form Elementor: fecha**, apagada por defecto, sin controles adicionales. General para todos los formularios Elementor del sitio: no depende de un dominio, página ni ID. Activa escritura `dd/mm/aaaa` con separadores automáticos e `inputmode="numeric"`, manteniendo el input `date`, su icono y el selector nativo original. Conserva el nombre original y envía una sola fecha ISO (`aaaa-mm-dd`), incluidos los campos nativos que genera Flatpickr en móvil; no convierte los calendarios Flatpickr de escritorio ni otros pickers personalizados. No afecta a hora/datetime ni a campos ajenos a Elementor.
