@@ -2,6 +2,14 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Citas: calendario y hora en un solo desplegable (1.2.57)
+
+- Un único campo de Cita: abre el calendario, elige un día y pasa con un desvanecimiento a las horas disponibles, con botón para volver. La selección final muestra fecha y hora juntas. Instrucciones, zona horaria y reintento quedan dentro del desplegable; no hay un segundo selector de hora en el formulario.
+- Horas de inicio cada **15 minutos**, respetando la duración de las citas y los descansos. Citas pendientes, confirmadas y reservas temporales activas bloquean todos los intervalos que se solapen. El servidor vuelve a comprobar antes de reservar.
+- Horario semanal con desplegables de 15 minutos, un turno inicial y botón para añadir hasta **cuatro turnos por día**. Un día con todos sus turnos vacíos permanece cerrado. Valida turnos incompletos, invertidos o solapados; conserva los horarios válidos anteriores sin redondearlos.
+- Calendario para marcar días libres en rojo desde hoy, usando la fecha de WordPress; los pasados quedan desactivados. Las excepciones prevalecen sobre la semana, sin cancelar citas existentes. Colores de círculo, background y número de fechas disponibles, y background del calendario, con restablecimiento automático y vista previa.
+- Dos columnas de ajustes en escritorio, una en tablet/móvil, guardado AJAX y botón gris sin cambios. No modifica formularios de producción: si hay un campo Date antiguo además de Cita, elimínalo desde Elementor y conserva un solo campo Cita.
+
 ## Form Elementor: citas (1.2.56)
 
 Nueva caja **Elementor > Form Elementor: citas**, apagada por defecto. Al activarla aparece **Citas / Appointments** debajo de Comentarios (posición 25.1), con acceso exclusivo de administradores. Una agenda por sitio; no depende de un dominio, página o ID fijo. Requiere el widget Formulario de Elementor Pro o una implementación compatible con su API.
