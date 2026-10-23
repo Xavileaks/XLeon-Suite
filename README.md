@@ -2,6 +2,13 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Citas: distribución y duración vigente (1.2.58)
+
+- Lista de reservas, filtros y tabla justo debajo de la introducción, antes de la guía y los ajustes. Las dos cajas de configuración se conservan en escritorio.
+- Duración, antelación y horizonte en una fila de tres columnas; en móvil se apilan. Selectores de turnos, eliminar y añadir con altura común de **44 px**, siguiendo la alineación revisada con 12ui. Calendario de días libres al ancho completo interior de su caja, sin recortarse en tablet.
+- La duración actual se usa también para calcular la ocupación de reservas pendientes, confirmadas y temporales activas. Una reserva de las 10:00 creada con 30 minutos bloqueará hasta las 11:00 al cambiar a 60. También respeta reducciones y duraciones mayores, sin modificar las horas de inicio ni reescribir los registros históricos. Completadas conservan su duración registrada; canceladas no bloquean.
+- Consulta pública y validación final comparten este cálculo, incluso al extenderse una cita desde el día o mes anterior. Ampliar la duración no cancela ni desplaza otras citas ya existentes: revisa los posibles solapamientos. Prueba local de distribución sin guardar opciones en `tests/appointments-layout.php` y casos de regresión en `tests/appointments.php`.
+
 ## Citas: calendario y hora en un solo desplegable (1.2.57)
 
 - Un único campo de Cita: abre el calendario, elige un día y pasa con un desvanecimiento a las horas disponibles, con botón para volver. La selección final muestra fecha y hora juntas. Instrucciones, zona horaria y reintento quedan dentro del desplegable; no hay un segundo selector de hora en el formulario.
