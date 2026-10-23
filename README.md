@@ -2,6 +2,13 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Citas: tarjetas, contacto y cambio de fecha (1.2.59)
+
+- Reservas en tarjetas revisadas con 12ui: tres por fila en escritorio, dos en tablet y una en móvil. Nombre, consultorio, fecha/hora, zona, estado y datos originales. Pendientes primero, confirmadas después, luego canceladas y completadas al final. Conserva filtros, paginación y guardado de estados.
+- WhatsApp y correo abren sus enlaces, sin enviar mensajes automáticamente. Código de país configurable por sitio para teléfonos locales, sin asumir un valor. Los números internacionales con `+` o `00` funcionan sin ese ajuste. Contactos sin datos válidos quedan desactivados. Consultorio detectado por etiqueta o por ID explícito en el campo Cita de Elementor para nuevos envíos; si falta, «No indicado».
+- Cambiar fecha usa el mismo desplegable de día y hora, solo para pendientes o confirmadas. La consulta privada requiere administrador y nonce, excluye la propia reserva y comprueba de nuevo disponibilidad bajo el bloqueo de reservas al guardar. Conserva estado y datos originales, libera el horario anterior y no envía avisos.
+- «Minutos» y «días en adelante» debajo de sus inputs. Calendario de días libres al ancho interior, siete columnas y círculos de hasta 44 px para reducir su altura. Selector de color, texto y restablecer comparten 44 px de altura. Las cajas de ajustes permanecen en dos columnas de escritorio y una en tablet/móvil.
+
 ## Citas: distribución y duración vigente (1.2.58)
 
 - Lista de reservas, filtros y tabla justo debajo de la introducción, antes de la guía y los ajustes. Las dos cajas de configuración se conservan en escritorio.
