@@ -2,6 +2,10 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Fecha: flechas alineadas con mes y año (1.2.65)
+
+- La fila de mes/año se convierte en la referencia de posición de sus flechas, evitando que aparezcan sobre el título superior. Ambas quedan centradas verticalmente, con área de 44 px, también en móvil. Conserva la ocultación al alcanzar los límites mínimo/máximo y la navegación existente.
+
 ## Phone mask: color del campo de Elementor (1.2.64)
 
 - El prefijo internacional y la flecha del selector con bandera usan el color calculado del input, es decir, **Field → Text Color** de ese formulario. No toman el color del contenedor ni el gris fijo del icono; cada campo mantiene su propio color.
