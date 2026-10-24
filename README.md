@@ -2,6 +2,12 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Citas: selector conjunto de mes y año (1.2.62)
+
+- Encabezado único «Octubre 2026» en lugar del mes desplegable y el año numérico separados. Abre una vista con dos ruedas desplazables de meses y años, selección central y un único botón ×. Sin días ni barras de scroll en esa vista; admite gesto táctil, rueda de ratón, clic y teclado.
+- La × lleva al calendario del período centrado, listo para elegir día y después hora. Enter/Escape también vuelven al calendario. Solo ofrece meses/años dentro del rango de reserva del sitio, adapta los meses al cambiar de año y conserva una cita ya elegida mientras navegas. Texto en español/inglés y ancho móvil alineado con el input.
+- Diseño revisado con 12ui e integrado en el campo Cita existente, sin opciones adicionales ni cambios en los campos Date ordinarios.
+
 ## Citas: desplegable alineado en móvil (1.2.61)
 
 - En móvil y tablet (hasta 1024 px), el calendario y las horas toman el ancho real del input de Cita. Se mide antes de que Flatpickr calcule su posición para mantener ambos bordes alineados, sin desplazarse a la derecha.
