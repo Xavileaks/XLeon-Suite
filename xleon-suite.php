@@ -3,7 +3,7 @@
 Plugin Name: XLeon Suite
 Plugin URI: https://github.com/Xavileaks/XLeon-Suite
 Description: Modular WordPress features and global assets.
-Version: 1.2.62
+Version: 1.2.63
 Author: Xavier Leon
 Author URI: https://xavileeon.com
 Update URI: https://github.com/Xavileaks/XLeon-Suite
@@ -14,7 +14,7 @@ Text Domain: xleon-suite
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'XW_FUNCTIONS_VERSION', '1.2.62' );
+define( 'XW_FUNCTIONS_VERSION', '1.2.63' );
 define( 'XW_FUNCTIONS_FILE', __FILE__ );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin-settings.php';
@@ -76,7 +76,7 @@ function xleon_suite_enqueue_styles() {
     $last_handle = '';
 
     foreach (glob($css_dir . '*.css') as $file) {
-        if ( in_array( basename( $file ), array( 'admin-settings.css', 'appointments.css', 'appointments-admin.css', 'woocommerce-cart.css', 'woocommerce-checkout.css' ), true ) ) {
+        if ( in_array( basename( $file ), array( 'admin-settings.css', 'elementor-date.css', 'appointments.css', 'appointments-admin.css', 'woocommerce-cart.css', 'woocommerce-checkout.css' ), true ) ) {
             continue;
         }
 

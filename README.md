@@ -2,6 +2,12 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Fecha: selector conjunto de mes y año (1.2.63)
+
+- El diseño aprobado con 12ui para Cita se aplica también al campo Date dentro del interruptor **Form Elementor: fecha**, sin nuevas opciones. Encabezado de mes y año juntos; dos ruedas desplazables sin barras visibles; × para volver al calendario del período centrado. Acento del color principal de Elementor con franja al 10 % y ancho alineado con el input en móvil/tablet.
+- Usa el Flatpickr de Elementor también para las fechas nativas/móviles, mediante un control auxiliar sin nombre: conserva el input original, su validación y un único valor ISO enviado. No requiere activar Citas ni Global CSS; el cargador global excluye ahora el CSS de Fecha para respetar su interruptor.
+- Mantiene escritura numérica, máscara y validación por dígitos, icono permanente, límites mínimo/máximo, paso entre fechas, fechas desactivadas, restablecimiento y campos dinámicos. El selector de Fecha usa los límites de ese campo, permite años 1000–3999 si no hay otros límites y no usa la disponibilidad de Citas. Limpia los calendarios auxiliares al reconstruir el formulario.
+
 ## Citas: selector conjunto de mes y año (1.2.62)
 
 - Encabezado único «Octubre 2026» en lugar del mes desplegable y el año numérico separados. Abre una vista con dos ruedas desplazables de meses y años, selección central y un único botón ×. Sin días ni barras de scroll en esa vista; admite gesto táctil, rueda de ratón, clic y teclado.
