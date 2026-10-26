@@ -2,6 +2,19 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Elementor: estilos de correo para administrador y cliente (1.2.66)
+
+Dos cajas nuevas al principio de **Elementor**, apagadas por defecto e independientes:
+
+- **Correo del administrador**: da estilo a la acción Email existente. Nombre/logo del sitio, aviso de nuevo mensaje, campos ordenados y metadatos seleccionados. Omite campos vacíos y controles de seguridad como CAPTCHA/contraseñas; conserva campos ordinarios, incluido el valor 0, y el manejo nativo de adjuntos.
+- **Correo del cliente**: da estilo únicamente a **Email 2 ya configurado**. Confirmación breve con icono, sin repetir los datos enviados. En su caja puedes cambiar el texto; vacío usa el mensaje genérico en español/inglés según el idioma de WordPress. Configura en Elementor el destinatario de Email 2, por ejemplo `[field id="email"]`; la suite no añade envíos ni cambia destinatarios, remitentes, copias o adjuntos.
+
+Se aplican solo si **Mensaje** está vacío o es exactamente `[all-fields]`, y **Enviar como** es HTML. Si el contenido tiene texto, HTML, códigos de campo personalizados o contenido dinámico, se respeta el correo de Elementor. El modo texto plano también se conserva. Los asuntos genéricos se adaptan al idioma de WordPress; los asuntos personalizados, las etiquetas y los valores del formulario se mantienen.
+
+Los metadatos se eligen en Email o Email 2: únicamente los activados y disponibles aparecen en su sección, que desaparece al quedar vacía. No requiere Global CSS. No guarda copias de los correos ni configura SMTP: el transporte y los errores de entrega siguen siendo de Elementor/WordPress. HTML basado en tablas, estilos en línea, fuentes del sistema e iconos PNG con texto alternativo. Revisado en vista previa de navegador; no supone una prueba de entrega en cada cliente de correo.
+
+Diseño elaborado con 12ui. Pruebas locales con las acciones reales Email/Email2 y todas las llamadas a `wp_mail` interceptadas, sin envíos: idiomas, condiciones de exclusión, metadatos, escapes, destinatarios, adjuntos, fallos y restauración del registro. Las cajas conservan dos columnas en escritorio y una en tablet/móvil. No instala ni activa la utilidad en sitios automáticamente.
+
 ## Fecha: flechas alineadas con mes y año (1.2.65)
 
 - La fila de mes/año se convierte en la referencia de posición de sus flechas, evitando que aparezcan sobre el título superior. Ambas quedan centradas verticalmente, con área de 44 px, también en móvil. Conserva la ocultación al alcanzar los límites mínimo/máximo y la navegación existente.
