@@ -2,6 +2,10 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Elementor: ancho del mensaje de confirmación (1.2.68)
+
+El campo Mensaje de confirmación ocupa todo el ancho interior de su caja, también en móvil, y permite ajustar su altura. Se mantienen las dos columnas de funciones en escritorio.
+
 ## Elementor: iconos verdes en los correos (1.2.67)
 
 Los iconos de mensaje y recepción usan verde con fondo verde suave. La URL incluye la versión del plugin para renovar la imagen almacenada en caché.
