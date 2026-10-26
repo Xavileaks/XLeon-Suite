@@ -2,6 +2,10 @@
 
 Plugin personalizado de WordPress con funciones reutilizables y una pantalla para activar, desactivar y configurar cada módulo.
 
+## Elementor: iconos verdes en los correos (1.2.67)
+
+Los iconos de mensaje y recepción usan verde con fondo verde suave. La URL incluye la versión del plugin para renovar la imagen almacenada en caché.
+
 ## Elementor: estilos de correo para administrador y cliente (1.2.66)
 
 Dos cajas nuevas al principio de **Elementor**, apagadas por defecto e independientes:
