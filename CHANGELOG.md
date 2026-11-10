@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.81
+
+- Smart Filter para WooCommerce con grupos reutilizables en WordPress, un widget editable en Elementor y filtrado sin recarga del Loop Grid de productos.
+
 ## 1.2.41
 
 - Botón Guardar cambios gris/desactivado sin cambios pendientes y azul al editar, incluyendo controles dinámicos, colores y medios.
