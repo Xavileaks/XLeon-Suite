@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.85
+
+- Corrige la actualización AJAX de Smart Filter cuando EasyPost intercepta las solicitudes de la tienda.
+
 ## 1.2.84
 
 - Smart Filter busca las plantillas de Loop guardadas por nombre con el selector de Elementor. Si varias cuadrículas del documento usan la plantilla elegida, permite indicar cuál filtrar.
