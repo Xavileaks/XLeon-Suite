@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.90
+
+- Elimina el ajuste de columnas de colores. Las muestras se distribuyen automáticamente según su tamaño, separación y ancho disponible, incluidos los grupos existentes.
+
 ## 1.2.89
 
 - Alinea las muestras de color al borde inicial y mantiene las columnas en las filas incompletas, evitando que los últimos colores se separen hacia los extremos.
