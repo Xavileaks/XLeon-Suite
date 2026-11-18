@@ -3,7 +3,7 @@
 Plugin Name: XLeon Suite
 Plugin URI: https://github.com/Xavileaks/XLeon-Suite
 Description: Modular WordPress features and global assets.
-Version: 1.2.93
+Version: 1.2.94
 Author: Xavier Leon
 Author URI: https://xavileeon.com
 Update URI: https://github.com/Xavileaks/XLeon-Suite
@@ -14,9 +14,10 @@ Text Domain: xleon-suite
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'XW_FUNCTIONS_VERSION', '1.2.93' );
+define( 'XW_FUNCTIONS_VERSION', '1.2.94' );
 define( 'XW_FUNCTIONS_FILE', __FILE__ );
 
+require_once plugin_dir_path( __FILE__ ) . 'includes/elementor-form-security.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/admin-settings.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/github-updater.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/back-to-top.php';

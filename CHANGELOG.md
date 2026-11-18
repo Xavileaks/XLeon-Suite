@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.94
+
+- Añade un límite opcional de envíos por IP para formularios de Elementor, con espera configurable en días, horas y minutos.
+
 ## 1.2.93
 
 - Corrige Duplicar para conservar el tipo original de las plantillas Elementor, incluidos Loop Item, cabeceras, pies y plantillas individuales. Inicializa el tipo antes de los eventos de guardado y evita metadatos de tipo duplicados.
