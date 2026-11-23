@@ -49,26 +49,45 @@ try {
     update_option( 'xw_settings', $legacy );
     $catalog = xw_global_style_files();
     $handles = global_styles_load();
-    global_styles_check( count( $catalog ) >= 15 && count( $handles ) === count( $catalog ), 'existing installations start with the bundled global styles enabled' );
-    global_styles_check( ! array_intersect( array( 'elementor-date', 'woocommerce-cart', 'back-to-top' ), array_keys( $catalog ) ), 'feature-specific style files are excluded from the global card' );
-    global_styles_check( str_contains( implode( '', wp_styles()->get_data( 'xleon-elementor-extra', 'after' ) ), '--color-web:#611206' ) && str_contains( implode( '', wp_styles()->get_data( 'xleon-global-scrollbar', 'after' ) ), 'width:0px' ), 'saved global color and scrollbar options still apply' );
+    global_styles_check( count( $catalog ) >= 14 && count( $handles ) === count( $catalog ) + 2, 'existing installations start with the bundled global styles enabled' );
+    global_styles_check( ! array_intersect( array( 'elementor-date', 'woocommerce-cart', 'back-to-top', 'elementor-extra', 'global-scrollbar' ), array_keys( $catalog ) ), 'styles configured elsewhere are excluded from the individual switches' );
+    global_styles_check( str_contains( implode( '', wp_styles()->get_data( 'xleon-global-color', 'after' ) ), '--color-web:#611206' ) && str_contains( implode( '', wp_styles()->get_data( 'xleon-global-scrollbar', 'after' ) ), 'width:0px' ), 'saved global color and an intentional zero scrollbar width still apply' );
+    ob_start();
+    wp_styles()->do_items( array( 'xleon-global-color', 'xleon-global-scrollbar' ) );
+    $inline = ob_get_clean();
+    global_styles_check( str_contains( $inline, '--color-web:#611206' ) && str_contains( $inline, 'width:0px' ), 'WordPress prints both inline styles' );
+
+    $previously_disabled = $legacy;
+    $previously_disabled['styles']['rules'] = array( 'elementor-extra' => 0, 'global-scrollbar' => 0 );
+    $read_legacy = static function() use ( $previously_disabled ) { return $previously_disabled; };
+    add_filter( 'pre_option_xw_settings', $read_legacy );
+    $legacy_handles = global_styles_load();
+    remove_filter( 'pre_option_xw_settings', $read_legacy );
+    global_styles_check( ! array_intersect( array( 'xleon-global-color', 'xleon-global-scrollbar', 'xleon-global-selection-color' ), $legacy_handles ), 'removed switches that were off do not reactivate stored styling' );
 
     $input = xw_get_settings();
     $input['styles']['rules']['global-paragraph-last-margin'] = '0';
-    $input['styles']['rules']['global-scrollbar'] = '0';
     $input['styles']['rules']['missing-file'] = '1';
     $result = global_styles_save( $input );
     $handles = global_styles_load();
     global_styles_check( $result['success'] && 0 === $result['data']['settings']['styles']['rules']['global-paragraph-last-margin'], 'AJAX save persists individual off switches' );
     global_styles_check( ! isset( xw_get_settings()['styles']['rules']['missing-file'] ) && in_array( 'xleon-global-elementor-icon', $handles, true ), 'only catalog entries are saved and unchecked rules remain independent' );
-    global_styles_check( ! in_array( 'xleon-global-paragraph-last-margin', $handles, true ) && ! wp_styles()->get_data( 'xleon-global-scrollbar', 'after' ), 'disabled rules omit both the stylesheet and its custom CSS' );
+    global_styles_check( ! in_array( 'xleon-global-paragraph-last-margin', $handles, true ), 'disabled rules omit their stylesheet' );
 
     $input['styles']['rules'] = array_fill_keys( array_keys( $catalog ), '0' );
     $result = global_styles_save( $input );
-    global_styles_check( $result['success'] && ! global_styles_load() && ! array_filter( xw_get_settings()['styles']['rules'] ), 'turning all rules off persists and loads no global CSS' );
+    global_styles_check( $result['success'] && array( 'xleon-global-color', 'xleon-global-scrollbar' ) === global_styles_load() && ! array_filter( xw_get_settings()['styles']['rules'] ), 'turning all individual rules off leaves the configured controls above in effect' );
     $input['styles']['rules'] = array_fill_keys( array_keys( $catalog ), '1' );
+    $input['styles']['primary_color'] = '';
+    $input['styles']['scrollbar_width'] = '';
+    $input['styles']['scrollbar_radius'] = '';
     $result = global_styles_save( $input );
-    global_styles_check( $result['success'] && count( global_styles_load() ) === count( $catalog ), 'all global styles can be restored' );
+    $handles = global_styles_load();
+    global_styles_check( $result['success'] && '' === $result['data']['settings']['styles']['scrollbar_width'] && ! array_intersect( array( 'xleon-global-color', 'xleon-global-scrollbar', 'xleon-global-selection-color', 'xleon-global-checkbox-color', 'xleon-global-radio-color' ), $handles ), 'clearing the upper controls preserves native colors and scrollbar' );
+    $input['styles']['scrollbar_thumb_color'] = '#611206';
+    $result = global_styles_save( $input );
+    global_styles_load();
+    global_styles_check( $result['success'] && array( '::-webkit-scrollbar-thumb{background:#611206;}' ) === wp_styles()->get_data( 'xleon-global-scrollbar', 'after' ), 'setting only the thumb color applies no other scrollbar overrides' );
 } finally {
     if ( false === $original ) { delete_option( 'xw_settings' ); } else { update_option( 'xw_settings', $original ); }
 }

@@ -1,5 +1,9 @@
 # Historial de cambios
 
+## 1.2.97
+
+- El color global y la barra de desplazamiento se controlan únicamente desde sus campos. Los campos vacíos conservan los estilos del sitio y el ancho de 0 px sigue ocultando la barra.
+
 ## 1.2.96
 
 - Organiza los cuatro ajustes de la barra de desplazamiento en una fila y permite activar o desactivar los estilos CSS globales por separado o en bloque.
